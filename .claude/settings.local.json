@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 cli/main.py)",
+      "Bash(python3 *)"
+    ]
+  }
+}
