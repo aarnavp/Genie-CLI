@@ -110,7 +110,7 @@ python path/to/main.py
 
 ## Additional Notes
 1. As Of Right Now
-- As of right now it may be functional but it is not complete, if you have a paid gemeni account and have access to better models it will do better
+- As of right now it may be functional but it is not complete, if you have a paid gemini account and have access to better models it will do better
 - It is not visually appealing and can fail since it is reprompted everytime it needs to execute command
 - Uses up many request per prompt -> want to optimize in the future.
 - Only Mac/Linux compatible

@@ -41,18 +41,17 @@ class GemeniWorker(Provider):
                 self.requests += 1
                 if response.usage_metadata:
                     self.total_tokens += response.usage_metadata.total_token_count
-                    print(f"[tokens: {response.usage_metadata.total_token_count} this req | {self.total_tokens} total | {self.requests} reqs]")
                 yield response.text
                 break
 
             except ServerError as e:
-                print(f"Retry {i+1}/5: server busy, waiting...")
+                print(f"\r  \033[33m⚠\033[0m  Retry {i+1}/5: server busy, waiting {2**i}s...")
                 time.sleep(2 ** i)
 
             except ClientError as e:
                 if e.code == 429:
                     delay = _retry_delay(e)
-                    print(f"Retry {i+1}/5: rate limited, waiting {delay}s...")
+                    print(f"\r  \033[33m⚠\033[0m  Retry {i+1}/5: rate limited, waiting {delay}s...")
                     time.sleep(delay)
                 else:
                     raise
@@ -77,11 +76,11 @@ class GemeniWorker(Provider):
             except ClientError as e:
                 if e.code == 429:
                     delay = _retry_delay(e)
-                    print(f"Retry {i+1}/5: rate limited, waiting {delay}s...")
+                    print(f"\r  \033[33m⚠\033[0m  Retry {i+1}/5: rate limited, waiting {delay}s...")
                     time.sleep(delay)
                 else:
                     raise
             except ServerError:
-                print(f"Retry {i+1}/5: server busy, waiting...")
+                print(f"\r  \033[33m⚠\033[0m  Retry {i+1}/5: server busy, waiting {2**i}s...")
                 time.sleep(2 ** i)
     
